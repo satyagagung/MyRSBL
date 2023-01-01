@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My RSBL</string>
+    <string name="price">0</string>
+    <string name="news_header">"News Header "</string>
+</resources>
