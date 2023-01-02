@@ -30,7 +30,7 @@ fun ScreenMain(){
     ){
         SingleCard()
     }
-    BackPressSample()
+    BackPressEvent()
 }
 
 @Composable
@@ -99,7 +99,7 @@ sealed class BackPress {
 }
 
 @Composable
-private fun BackPressSample() {
+private fun BackPressEvent() {
     var showToast by remember { mutableStateOf(false) }
     var backPressState by remember { mutableStateOf<BackPress>(BackPress.Idle) }
     val context = LocalContext.current

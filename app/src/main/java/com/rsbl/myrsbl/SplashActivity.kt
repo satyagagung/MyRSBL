@@ -1,23 +1,59 @@
 package com.rsbl.myrsbl
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.animation.OvershootInterpolator
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import com.rsbl.myrsbl.ui.theme.MyRSBLTheme
+import kotlinx.coroutines.Delay
 import kotlinx.coroutines.delay
 
+class SplashActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MyRSBLTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    ScreenSplash()
+                    LaunchedEffect(key1 = true){
+                        delay(2500L)
+                        val navigate = Intent(this@SplashActivity,MainActivity::class.java)
+                        startActivity(navigate)
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        finish()
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 @Composable
-fun ScreenSplash(navController: NavController){
+fun ScreenSplash(){
     val scale = remember{
         Animatable(initialValue = 0f)
     }
@@ -41,13 +77,14 @@ fun ScreenSplash(navController: NavController){
                 }
             )
         )
-        navController.navigate(MyRSBLScreen.Main.name){
-            popUpTo(MyRSBLScreen.Splash.name){ inclusive = true}
-        }
+
     }
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()) {
+        modifier = Modifier
+            .fillMaxSize().background(color = MaterialTheme.colors.background)
+    )
+    {
         Image(
             painter = painterResource(id = R.drawable.logo_rsbl_1),
             contentDescription = "Logo",

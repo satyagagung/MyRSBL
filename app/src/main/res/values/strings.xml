@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">My RSBL</string>
     <string name="price">0</string>
-    <string name="news_header">"News Header "</string>
+    <string name="news_header">"News Header"</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_jadwal">Jadwal Dokter</string>
+    <string name="nav_profile">Akun</string>
 </resources>
